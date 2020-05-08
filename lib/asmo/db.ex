@@ -42,7 +42,7 @@ defmodule Asmo.DB do
 
   @spec query_prefix!(String.t(), integer()) :: %MyXQL.Result{}
 
-  def query_prefix!(key_prefix, limit \\ 100) do
+  def query_prefix!(key_prefix, limit \\ -1) do
     {:ok, query} =
       MyXQL.prepare(@name, "", "SELECT `id`,`key` FROM assets WHERE `key` LIKE ? LIMIT ?")
 
