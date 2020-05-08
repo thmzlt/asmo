@@ -15,19 +15,22 @@ defmodule Asmo.Populate do
     {bucket, pattern} = Enum.random([legacy, modern])
     key = String.replace(pattern, "\d+", to_string(id))
 
-    {:ok, path} = temp_file(id)
+    {:ok, fd, path} = temp_file(id)
 
     Asmo.S3.upload!(bucket, key, path)
     Asmo.DB.insert_multi!([{id, key}])
+    IO.puts("Populated #{key}")
+    File.close(fd)
+    File.rm!(path)
 
     {:reply, :ok, state}
   end
 
   defp temp_file(id) do
-    {:ok, _fd, path} = Temp.open(%{prefix: "asmo-temp", suffix: ".png"})
+    {:ok, fd, path} = Temp.open(%{prefix: "asmo-temp", suffix: ".png"})
 
-    File.write!(path, "PNG_IMAGE #{id}")
+    File.write!(path, "PNG_IMAGE #{id}\n")
 
-    {:ok, path}
+    {:ok, fd, path}
   end
 end
