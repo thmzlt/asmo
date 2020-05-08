@@ -28,7 +28,7 @@ defmodule Asmo.Application do
       username: db["username"],
       password: db["password"],
       name: :myxql,
-      show_sensitive_data_on_connection_error: true
+      pool_size: Application.fetch_env!(:asmo, :db_pool_size)
     ]
   end
 end
