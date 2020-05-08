@@ -21,7 +21,7 @@ defmodule Asmo.S3 do
 
   def upload(bucket, key, path) do
     data = File.read!(path)
-    request = ExAws.S3.put_object(bucket, key, data)
+    request = ExAws.S3.put_object(bucket, key, data, acl: :public_read)
 
     {:ok, _res} = ExAws.request(request)
   end
