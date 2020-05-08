@@ -7,6 +7,7 @@ in
 pkgs.mkShell {
   buildInputs = [
     elixir
+    pkgs.awscli
     (pkgs.terraform.withPlugins (p: [ p.aws ]))
   ];
 
