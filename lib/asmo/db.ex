@@ -3,9 +3,9 @@ defmodule Asmo.DB do
 
   @name :myxql
 
-  @spec create_table() :: %MyXQL.Result{}
+  @spec create_table!() :: %MyXQL.Result{}
 
-  def create_table do
+  def create_table! do
     {:ok, query} =
       MyXQL.prepare(:myxql, "", """
         CREATE TABLE `assets` (
@@ -18,17 +18,17 @@ defmodule Asmo.DB do
     MyXQL.execute!(@name, query, [])
   end
 
-  @spec drop_table() :: %MyXQL.Result{}
+  @spec drop_table!() :: %MyXQL.Result{}
 
-  def drop_table do
+  def drop_table! do
     {:ok, query} = MyXQL.prepare(@name, "", "DROP TABLE `assets` ")
 
     MyXQL.execute!(@name, query, [])
   end
 
-  @spec insert_multi([{integer(), String.t()}]) :: %MyXQL.Result{}
+  @spec insert_multi!([{integer(), String.t()}]) :: %MyXQL.Result{}
 
-  def insert_multi(values) do
+  def insert_multi!(values) do
     value_string =
       values
       |> Enum.map(fn {id, key} -> "(#{id}, '#{key}') " end)
@@ -42,18 +42,18 @@ defmodule Asmo.DB do
     MyXQL.execute!(@name, query, [])
   end
 
-  @spec query_prefix(String.t(), integer()) :: %MyXQL.Result{}
+  @spec query_prefix!(String.t(), integer()) :: %MyXQL.Result{}
 
-  def query_prefix(key_prefix, limit \\ 100) do
+  def query_prefix!(key_prefix, limit \\ 100) do
     {:ok, query} =
       MyXQL.prepare(@name, "", "SELECT `id`,`key` FROM assets WHERE `key` LIKE ? LIMIT ?")
 
     MyXQL.execute!(@name, query, ["#{key_prefix}%", limit])
   end
 
-  @spec update(String.t(), String.t()) :: %MyXQL.Result{}
+  @spec update!(String.t(), String.t()) :: %MyXQL.Result{}
 
-  def update(id, key) do
+  def update!(id, key) do
     {:ok, query} = MyXQL.prepare(@name, "", "UPDATE assets SET `key` = ? WHERE `id` = ?")
 
     MyXQL.execute!(@name, query, [key, id])
