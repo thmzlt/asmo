@@ -1,5 +1,15 @@
 defmodule Asmo.Populate do
-  def run(id) do
+  use GenServer
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, nil)
+  end
+
+  def init(_) do
+    {:ok, nil}
+  end
+
+  def handle_call({:run, id}, _from, state) do
     legacy = Application.fetch_env!(:asmo, :legacy)
     modern = Application.fetch_env!(:asmo, :modern)
     {bucket, pattern} = Enum.random([legacy, modern])
@@ -7,8 +17,10 @@ defmodule Asmo.Populate do
 
     {:ok, path} = temp_file(id)
 
-    Asmo.S3.upload(bucket, key, path)
-    Asmo.DB.insert_multi([{id, key}])
+    Asmo.S3.upload!(bucket, key, path)
+    Asmo.DB.insert_multi!([{id, key}])
+
+    {:reply, :ok, state}
   end
 
   defp temp_file(id) do
