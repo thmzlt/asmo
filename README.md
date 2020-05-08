@@ -63,3 +63,13 @@ Look at the `config/config.exs` file for settings and their values. The importan
 - `chunk_size`: number of assets that are enqueued to be processed together
 - `db_pool_size`: size of database connection pool
 - `process_pool_size`: number of assets that are processed in parallel
+
+#### MySQL Configuration
+
+You might want to run your own instance of MySQL instead of one managed by AWS.
+For that case, you don't want the database settings picked up from the
+Terraform state.
+
+To do that, edit the body of `db_options()` in `lib/asmo/application.ex` to
+return a Keyword list with the right values for `:hostname`, `:database`,
+`:username` and `:password`, and leave the other fields as-is.
