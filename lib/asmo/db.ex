@@ -3,9 +3,9 @@ defmodule Asmo.DB do
 
   @name :myxql
 
-  @spec create_table!() :: %MyXQL.Result{}
+  @spec create_table() :: {:ok, %MyXQL.Result{}} | {:error, term()}
 
-  def create_table! do
+  def create_table do
     {:ok, query} =
       MyXQL.prepare(:myxql, "", """
         CREATE TABLE `assets` (
@@ -15,15 +15,15 @@ defmodule Asmo.DB do
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
       """)
 
-    MyXQL.execute!(@name, query, [])
+    MyXQL.execute(@name, query, [])
   end
 
-  @spec drop_table!() :: %MyXQL.Result{}
+  @spec drop_table() :: {:ok, %MyXQL.Result{}} | {:error, term()}
 
-  def drop_table! do
+  def drop_table do
     {:ok, query} = MyXQL.prepare(@name, "", "DROP TABLE `assets` ")
 
-    MyXQL.execute!(@name, query, [])
+    MyXQL.execute(@name, query, [])
   end
 
   @spec insert_multi!([{integer(), String.t()}]) :: %MyXQL.Result{}
