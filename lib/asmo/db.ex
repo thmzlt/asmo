@@ -37,8 +37,6 @@ defmodule Asmo.DB do
     {:ok, query} =
       MyXQL.prepare(@name, "", "INSERT INTO `assets` (`id`, `key`) values #{value_string}")
 
-    IO.inspect(query)
-
     MyXQL.execute!(@name, query, [])
   end
 

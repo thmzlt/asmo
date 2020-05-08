@@ -18,6 +18,7 @@ defmodule Asmo.Move do
     Asmo.S3.copy!(m_bucket, m_key, l_bucket, l_key)
     Asmo.DB.update!(id, m_key)
     Asmo.S3.delete!(l_bucket, l_key)
+    IO.puts("Moved #{l_key} to #{m_key}")
 
     {:reply, :ok, state}
   end
