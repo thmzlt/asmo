@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Populate do
   use Mix.Task
 
-  @shortdoc "Create and distribute assets between the buckets"
+  @shortdoc "Create and distribute assets between legacy and modern buckets"
   def run([]) do
     run(["1000", "1"])
   end

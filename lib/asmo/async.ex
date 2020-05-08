@@ -1,4 +1,6 @@
 defmodule Asmo.Async do
+  @spec start_pool(module()) :: {:ok, pid()}
+
   def start_pool(worker_module) do
     Supervisor.start_link(
       [:poolboy.child_spec(worker_module, pool_options(worker_module))],
@@ -6,6 +8,8 @@ defmodule Asmo.Async do
       name: Asmo.Populate.Supervisor
     )
   end
+
+  @spec pool_options(module()) :: list()
 
   def pool_options(worker_module) do
     [
@@ -15,6 +19,8 @@ defmodule Asmo.Async do
       max_overflow: 0
     ]
   end
+
+  @spec call(module(), term()) :: Task.t()
 
   def call(worker_module, args) do
     Task.async(fn ->
