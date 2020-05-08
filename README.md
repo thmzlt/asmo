@@ -17,7 +17,7 @@ From the Nix shell, run the following commands:
 
 1. `terraform init` to set up the terraform tool using the providers installed by Nix
 2. `terrafrom apply` to create the infrastructure resources (S3 buckets and MySQL database)
-3. `mix deps.get` to download the Elixir dependencies used by the project
+3. `mix deps.get` to download the Elixir dependencies used by the project (say 'yes' to rebar3 and hex)
 4. `mix reset_table` to create an assets table in the database
 
 You should now be ready to give it a try. First, populate some assets with the following command:
