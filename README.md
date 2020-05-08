@@ -9,18 +9,18 @@ Asmo takes advantage of the Nix package manager, and you can get set up by
 from the project directory. You be put in an isolated shell with all
 dependencies installed.
 
-_[To start the infrastructure and communicate with AWS, you will need to
+_To start the infrastructure and communicate with AWS, you will need to
 authenticate with the AWS CLI tool, so Asmo can use its credentials (in
-`~/.aws`). The AWS CLI tool is available in the Nix shell.]_
+`~/.aws`). The AWS CLI tool is available in the Nix shell._
 
 From the Nix shell, run the following commands:
 
 1. `terraform init` to set up the terraform tool using the providers installed by Nix
-- `terrafrom apply` to create the infrastructure resources (S3 buckets and MySQL database)
-- `mix deps.get` to download the Elixir dependencies used by the project
-- `mix reset_table` to create an assets table in the database
+2. `terrafrom apply` to create the infrastructure resources (S3 buckets and MySQL database)
+3. `mix deps.get` to download the Elixir dependencies used by the project
+4. `mix reset_table` to create an assets table in the database
 
-You should not be ready to give it a try. First, populate some asssets with the following command:
+You should now be ready to give it a try. First, populate some assets with the following command:
 
 ```
 $ mix populate [number_of_assets] [offset of the first id]
@@ -47,7 +47,7 @@ Moved images/avatar-1.png to avatar/avatar-2.png
 ...
 ```
 
-Finally, you can check the distribution again to assert the assets have been moved:
+You can check the distribution again and see that the assets have been moved:
 
 ```
 $ mix check
