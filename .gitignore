@@ -23,4 +23,4 @@ erl_crash.dump
 asmo-*.tar
 
 terraform.tfstate*
-.terraform
+.terraform*
