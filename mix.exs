@@ -28,6 +28,7 @@ defmodule Asmo.MixProject do
       {:hackney, "~> 1.9"},
       {:jason, "~> 1.2"},
       {:myxql, "~> 0.4"},
+      {:poolboy, "~> 1.5"},
       {:sweet_xml, "~> 0.6"},
       {:temp, "~> 0.4.7"}
     ]
