@@ -11,3 +11,7 @@ config :ex_aws,
     {:awscli, "default", 30},
     :instance_role
   ]
+
+config :asmo,
+  legacy: {"asmo-bucket-legacy", "images/avatar-\d+.png"},
+  modern: {"asmo-bucket-modern", "avatar/avatar-\d+.png"}
