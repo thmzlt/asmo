@@ -14,4 +14,8 @@ config :ex_aws,
 
 config :asmo,
   legacy: {"asmo-bucket-legacy", "images/avatar-\d+.png"},
-  modern: {"asmo-bucket-modern", "avatar/avatar-\d+.png"}
+  modern: {"asmo-bucket-modern", "avatar/avatar-\d+.png"},
+  chunk_size: 256,
+  db_pool_size: 32,
+  process_pool_size: 32,
+  process_timeout: 10000
