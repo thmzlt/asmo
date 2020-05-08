@@ -22,10 +22,13 @@ defmodule Asmo.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:configparser_ex, "~> 4.0"},
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
       {:jason, "~> 1.2"},
-      {:myxql, "~> 0.4"}
+      {:myxql, "~> 0.4"},
+      {:sweet_xml, "~> 0.6"}
     ]
   end
 end
